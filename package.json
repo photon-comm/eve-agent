@@ -1,0 +1,31 @@
+{
+  "name": "eve-agent",
+  "version": "0.0.0",
+  "private": true,
+  "description": "An eve agent you text over iMessage through Photon, ready to deploy on Vercel.",
+  "license": "MIT",
+  "type": "module",
+  "imports": {
+    "#*": "./agent/*"
+  },
+  "scripts": {
+    "build": "eve build",
+    "deploy": "eve deploy",
+    "dev": "eve dev",
+    "start": "eve start",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "@vercel/connect": "2.2.0",
+    "ai": "^7.0.128",
+    "eve": "^0.74.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "24.x",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
