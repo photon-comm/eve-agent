@@ -97,6 +97,10 @@ agent/
 
 eve also gives the agent its [default tools](https://eve.dev/docs/concepts/built-in-tools), such as web search and web fetch. Edit `agent/instructions.md` to change how it talks, and add tools under `agent/tools/`.
 
+## photon.jsonc
+
+`photon.jsonc` tells Photon what this template needs, so the Photon dashboard can set it up without anyone pasting a key. It names the iMessage channel, says Photon delivers messages as webhooks to `/eve/v1/photon` signed the way eve checks them, and lists the four variables Photon writes into your Vercel project. Change it in the same pull request as the code it describes. A workflow checks it on every change; see [`.github/photon`](.github/photon) to run the check yourself.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
