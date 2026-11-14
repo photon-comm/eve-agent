@@ -1,7 +1,7 @@
 # photon.jsonc checker
 
 `photon.jsonc` at the root of this repository tells Photon what this template
-needs: its channel, how messages reach it, which Photon values to write into
+needs: its channels, how messages reach it, which Photon values to write into
 its environment and under which names, what the person deploying fills in, and
 where it can run. Photon reads it to build the setup flow and to deploy.
 
