@@ -88,7 +88,7 @@ eve also gives the agent its [default tools](https://eve.dev/docs/concepts/built
 
 ## photon.jsonc
 
-`photon.jsonc` tells Photon what this template needs, so the Photon dashboard can set it up without anyone pasting a key. It names the channels the agent talks on, says Photon delivers messages as webhooks to `/eve/v1/photon` signed with Standard Webhooks, the way the adapter checks them, and lists the five variables Photon writes into your Vercel project. Change it in the same pull request as the code it describes. A workflow checks it on every change; see [`.github/photon`](.github/photon) to run the check yourself.
+`photon.jsonc` tells Photon what this template needs, so the Photon dashboard can set it up without anyone pasting a key. It names the channels the agent talks on, says Photon delivers messages as webhooks to `/eve/v1/photon` signed with Standard Webhooks, the way the adapter checks them, and lists the five variables Photon writes into your Vercel project. Change it in the same pull request as the code it describes. A workflow checks it on every pull request with [`@photon-ai/template`](https://www.npmjs.com/package/@photon-ai/template), the reader Photon uses; run `npx @photon-ai/template check photon.jsonc` to check it yourself.
 
 ## License
 
