@@ -2,7 +2,7 @@
   "name": "eve-agent",
   "version": "0.0.0",
   "private": true,
-  "description": "An eve agent you text over iMessage through Photon, ready to deploy on Vercel.",
+  "description": "An eve agent people message on iMessage, WhatsApp, Telegram, SMS and email through Photon, ready to deploy on Vercel.",
   "license": "MIT",
   "type": "module",
   "imports": {

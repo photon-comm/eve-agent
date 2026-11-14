@@ -10,9 +10,10 @@ export const { bot, channel, send } = chatSdkChannel({
   userName: "eve",
   adapters: { photon: photonAdapter() },
   state: createMemoryState(),
-  // Photon can't edit a sent iMessage, so each reply goes out once, complete.
+  // Not every platform can edit a sent message, so each reply goes out once,
+  // complete.
   streaming: false,
-  // A text that arrives while the agent is replying steers that reply.
+  // A message that arrives while the agent is replying steers that reply.
   concurrency: "concurrent",
 });
 
@@ -40,7 +41,8 @@ function photonAdapter(): PhotonAdapter {
 
 async function dispatch(thread: Thread, message: Message): Promise<void> {
   const allowed = allowedUsers();
-  // userName is the sender's phone number or email; userId is their Photon user ID.
+  // userName is the sender's handle, such as a phone number or an email
+  // address, or their Photon user ID when Photon has no handle for them.
   if (allowed && !allowed.has(normalizeHandle(message.author.userName))) {
     // Not on the list: no reply and no read receipt.
     return;
@@ -58,7 +60,7 @@ async function dispatch(thread: Thread, message: Message): Promise<void> {
     thread,
     auth: {
       attributes: message.author.userName ? { user_name: message.author.userName } : {},
-      authenticator: "photon-imessage",
+      authenticator: "photon",
       issuer: "photon",
       principalId: `photon:${message.author.userId}`,
       principalType: message.author.isBot === true ? "service" : "user",
@@ -67,18 +69,20 @@ async function dispatch(thread: Thread, message: Message): Promise<void> {
   });
 }
 
-// IMESSAGE_ALLOWED_USERS is a comma-separated list of phone numbers (E.164)
-// or Apple ID emails. When it is empty, the agent answers everyone.
+// PHOTON_ALLOWED_USERS is a comma-separated list of the handles the agent
+// answers, such as phone numbers (E.164) and email addresses. When it is
+// empty, the agent answers everyone.
 function allowedUsers(): Set<string> | undefined {
-  const handles = (process.env.IMESSAGE_ALLOWED_USERS ?? "")
+  const handles = (process.env.PHOTON_ALLOWED_USERS ?? "")
     .split(",")
     .map(normalizeHandle)
     .filter(Boolean);
   return handles.length > 0 ? new Set(handles) : undefined;
 }
 
-// "+1 (555) 123-4567" becomes "+15551234567". Emails are lowercased.
+// "+1 (555) 123-4567" becomes "+15551234567". Other handles, such as email
+// addresses, are lowercased.
 function normalizeHandle(handle: string): string {
   const value = handle.trim().toLowerCase();
-  return value.includes("@") ? value : value.replace(/[^\d+]/g, "");
+  return /^[\d\s().+-]+$/.test(value) ? value.replace(/[^\d+]/g, "") : value;
 }

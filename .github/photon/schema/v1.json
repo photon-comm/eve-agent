@@ -161,7 +161,14 @@
     "phone": { "type": "string", "pattern": "^\\+[1-9]\\d{6,14}$" },
 
     "channel": {
-      "oneOf": [{ "$ref": "#/$defs/channelImessage" }]
+      "oneOf": [
+        { "$ref": "#/$defs/channelImessage" },
+        { "$ref": "#/$defs/channelWhatsappPersonal" },
+        { "$ref": "#/$defs/channelWhatsappBusiness" },
+        { "$ref": "#/$defs/channelTelegram" },
+        { "$ref": "#/$defs/channelSms" },
+        { "$ref": "#/$defs/channelEmail" }
+      ]
     },
     "channelImessage": {
       "type": "object",
@@ -178,6 +185,52 @@
         },
         "defaultLine": { "enum": ["shared", "dedicated"], "default": "shared" }
       },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "channelWhatsappPersonal": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "const": "whatsapp_personal" },
+        "lines": {
+          "description": "Which kinds of WhatsApp Personal line the template works on; the setup offers these.",
+          "type": "array",
+          "items": { "enum": ["shared", "dedicated"] },
+          "minItems": 1,
+          "uniqueItems": true,
+          "default": ["shared", "dedicated"]
+        },
+        "defaultLine": { "enum": ["shared", "dedicated"], "default": "shared" }
+      },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "channelWhatsappBusiness": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "const": "whatsapp_business" } },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "channelTelegram": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "const": "telegram" } },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "channelSms": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "const": "sms" } },
+      "patternProperties": { "^x-": true },
+      "additionalProperties": false
+    },
+    "channelEmail": {
+      "type": "object",
+      "required": ["type"],
+      "properties": { "type": { "const": "email" } },
       "patternProperties": { "^x-": true },
       "additionalProperties": false
     },

@@ -6,13 +6,20 @@
   "name": "eve-agent",
   "version": "2.0.0",
   "title": "Vercel Eve Agent",
-  "description": "An assistant you text over iMessage, built on eve, Vercel's agent framework.",
+  "description": "An assistant people message on iMessage, WhatsApp, Telegram, SMS and email, built on eve, Vercel's agent framework.",
   "categories": ["assistant"],
   "author": { "name": "Photon", "url": "https://photon.codes" },
   "license": "MIT",
   "links": { "docs": "./README.md" },
 
-  "channels": [{ "type": "imessage", "lines": ["shared", "dedicated"], "defaultLine": "shared" }],
+  "channels": [
+    { "type": "imessage", "lines": ["shared", "dedicated"], "defaultLine": "shared" },
+    { "type": "whatsapp_personal", "lines": ["shared", "dedicated"], "defaultLine": "shared" },
+    { "type": "whatsapp_business" },
+    { "type": "telegram" },
+    { "type": "sms" },
+    { "type": "email" },
+  ],
 
   // Photon's Chat SDK adapter takes webhooks and verifies the Standard Webhooks signature.
   "delivery": {
@@ -28,7 +35,7 @@
     "PHOTON_API_KEY": "photon.project.secret",
     "PHOTON_API_URL": "photon.api.url",
     "PHOTON_WEBHOOK_SECRET": "photon.webhook.secret",
-    "IMESSAGE_ALLOWED_USERS": "photon.owner.phones",
+    "PHOTON_ALLOWED_USERS": "photon.owner.phones",
   },
 
   // The model runs through Vercel AI Gateway on the person's own Vercel account,
