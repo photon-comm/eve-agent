@@ -9,7 +9,7 @@
   "description": "An assistant people message on iMessage, WhatsApp, Telegram, SMS and email, built on eve, Vercel's agent framework.",
   "categories": ["assistant"],
   "author": { "name": "Photon", "url": "https://photon.codes" },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "links": { "docs": "./README.md" },
 
   "channels": [
