@@ -44,6 +44,5 @@
   "hosts": {
     "vercel": { "environments": ["production"] },
   },
-  "defaultHost": "vercel",
   "selfRun": { "guide": "./README.md#deploy-by-hand", "envFile": ".env" },
 }
