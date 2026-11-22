@@ -7,6 +7,7 @@
   "version": "2.0.0",
   "title": "Vercel Eve Agent",
   "description": "An assistant people message on iMessage, WhatsApp, Telegram, SMS and email, built on eve, Vercel's agent framework.",
+  "icon": "./icon.svg",
   "categories": ["assistant"],
   "author": { "name": "Photon", "url": "https://photon.codes" },
   "license": "Apache-2.0",
